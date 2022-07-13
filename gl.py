@@ -76,14 +76,6 @@ class Renderer(object):
     def glViewport(self, x, y, width, height):
         self.viewport = (x, y, width, height)
 
-    #image
-    def glImage(self, x, y, width, height, filename):
-        with open(filename, "rb") as file:
-            file.seek(14+40)
-            for y in range(height):
-                for x in range(width):
-                    self.pixels[x+self.viewport[0]][y+self.viewport[1]] = file.read(3)
-                    
 
     
         
