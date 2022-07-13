@@ -1,8 +1,8 @@
 #Programa principal
 import random
 from gl import *
-alto = 512  #alto de la pantalla
-ancho = 256 #ancho de la pantalla
+alto = 100  #alto de la pantalla
+ancho = 100 #ancho de la pantalla
 rende = Renderer(alto,ancho)
 
 rende.glViewport(int(ancho / 4), int(alto / 4), int(ancho / 2), int(alto / 2))
@@ -15,6 +15,8 @@ rende.glClear()
 
 
 rende.glClearViewport(color(0,1,1))
+
+rende.glPixelViewport(0,0,color(1,0,0))
 
 #rende.glPixel(50,75)
 
