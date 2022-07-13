@@ -1,14 +1,20 @@
 #Programa principal
 import random
 from gl import *
-alto = 1024
-ancho = 512
+alto = 512  #alto de la pantalla
+ancho = 256 #ancho de la pantalla
 rende = Renderer(alto,ancho)
 
-rende.glClearColor(0,1,0)
-rende.glColor(1,1,1)
+rende.glViewport(int(ancho / 4), int(alto / 4), int(ancho / 2), int(alto / 2))
+
+rende.glClearColor(1,1,1)
+rende.glColor(0,0,0)
 
 rende.glClear()
+
+
+
+rende.glClearViewport(color(0,1,1))
 
 #rende.glPixel(50,75)
 
@@ -38,30 +44,30 @@ rende.glClear()
 #            rende.glPixel(i,j)
 
 #starfield
-for i in range(alto):
-    for j in range(ancho):
-        if random.random() > 0.99:
-            size = random.randrange(0,3,1)
+# for i in range(alto):
+#     for j in range(ancho):
+#         if random.random() > 0.99:
+#             size = random.randrange(0,3,1)
             
-            if size == 0:
-                rende.glPixel(i,j,color(1,0,0))
+#             if size == 0:
+#                 rende.glPixel(i,j,color(1,0,0))
 
-            elif size == 1:
-                rende.glPixel(i,j,color(0,1,0))
-                rende.glPixel(i,j+1,color(0,1,0))
-                rende.glPixel(i+1,j+1,color(0,1,0))
-                rende.glPixel(i+1,j,color(0,1,0))
+#             elif size == 1:
+#                 rende.glPixel(i,j,color(0,1,0))
+#                 rende.glPixel(i,j+1,color(0,1,0))
+#                 rende.glPixel(i+1,j+1,color(0,1,0))
+#                 rende.glPixel(i+1,j,color(0,1,0))
 
-            elif size == 2:
-                rende.glPixel(i,j,color(0,0,1))
-                rende.glPixel(i,j+1,color(0,0,1))
-                rende.glPixel(i,j-1,color(0,0,1))
-                rende.glPixel(i+1,j,color(0,0,1))
-                rende.glPixel(i-1,j,color(0,0,1))
+#             elif size == 2:
+#                 rende.glPixel(i,j,color(0,0,1))
+#                 rende.glPixel(i,j+1,color(0,0,1))
+#                 rende.glPixel(i,j-1,color(0,0,1))
+#                 rende.glPixel(i+1,j,color(0,0,1))
+#                 rende.glPixel(i-1,j,color(0,0,1))
             
             
-        else:
-            rende.glPixel(i,j)
+#         else:
+#             rende.glPixel(i,j)
 
 
 

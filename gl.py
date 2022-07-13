@@ -27,6 +27,8 @@ class Renderer(object):
         self.clearColor = color(0,0,0)
         self.currentColor = color(1,1,1)
 
+        self.glViewport(0,0,self.width,self.height)
+
         self.glClear()
 
     def glClearColor(self, r, g, b):
@@ -40,10 +42,31 @@ class Renderer(object):
     #funcion para borrar todos los pixeles y crear el array de pixeles.
     def glClear(self):
         self.pixels = [[self.clearColor for y in range(self.height)] for x in range(self.width)]
+
+    def glClearViewport(self, clr = None):
+        for x in range(self.vpX, self.vpX + self.vpWidth):
+            for y in range(self.vpY, self.vpY + self.vpHeight):
+                self.glPixel(x, y, clr)
+
+    #funcion para dibujar una linea
+    def glLine(self, x0, y0, x1, y1):
+        #dibujamos la linea
+        self.glLineAux(x0, y0, x1, y1)
+        #dibujamos el pixel en el centro de la linea
+        self.glVertex(x0, y0)
+        self.glVertex(x1, y1)
+
         
     def glPixel(self, x, y, clr = None):
          if (0 <= x < self.width) and (0 <= y < self.height):
             self.pixels[x][y] = clr or self.currentColor 
+
+    def glPixelViewport(self, x, y, clr = None):
+        x = (x + 1) * (self.vpWidth / 2) + self.vpX
+        y = (y + 1) * (self.vpHeight / 2) + self.vpY
+        x = int(x)
+        y = int(y)
+        self.glPixel(x , y , clr)
     #funcion para poder abrir el archivo con un visualizador o crear la imagen. 
     def glFinish(self, filename):
         with open(filename, "wb") as file: 
@@ -73,8 +96,13 @@ class Renderer(object):
                     file.write(self.pixels[x][y])
     
     #viewport
-    def glViewport(self, x, y, width, height):
-        self.viewport = (x, y, width, height)
+    def glViewport(self, posX,posY, width, height):
+        self.vpX = posX
+        self.vpY = posY
+        self.vpWidth = width
+        self.vpHeight = height
+
+        self.viewport = (posX, posY, width, height)
 
 
     
